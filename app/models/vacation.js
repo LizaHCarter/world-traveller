@@ -1,5 +1,8 @@
 'use strict';
 
+var Mongo = require('mongodb'),
+    _     = require('lodash');
+
 function Vacation(o){
   this.name = o.name;
   this.coordinates = {lat:parseFloat(o.lat), lng:parseFloat(o.lng)};
@@ -18,6 +21,13 @@ Vacation.create = function(o, cb){
 
 Vacation.all = function(cb){
   Vacation.collection.find().toArray(cb);
+};
+
+Vacation.findById = function(id, cb){
+  var _id = Mongo.ObjectID(id);
+  Vacation.collection.findOne({_id:_id}, function(err, g){
+    cb(err, _.create(Vacation.prototype, g));
+  });
 };
 
 module.exports = Vacation;
