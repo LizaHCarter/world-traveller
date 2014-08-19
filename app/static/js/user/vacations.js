@@ -8,7 +8,6 @@
     initMap(0, 0, 2);
     var positions = getPositions();
     positions.forEach(function(pos){
-      console.log(pos);
       addMarker(pos.lat, pos.lng, pos.name);
     });
   });

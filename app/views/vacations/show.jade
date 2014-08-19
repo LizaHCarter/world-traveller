@@ -25,11 +25,25 @@ block content
               td 0
         .row
           .col-xs-12
-            form(method='post', action='/vacations/#{vacation._id}/photos/new', role='form')
+            form(method='post', action='/vacations/#{vacation._id}/photos/download', role='form')
               .form-group
                 label(for='photoUrl') Photo URL
                   input#photoUrl.form-control(type='text', name='url')
-              button(type="button" class="btn btn-info") Add Photo
+              button(type="submit" class="btn btn-info") Add Photo
+
+        .row
+          .col-xs-12
+            form(method='post', action='/vacations/#{vacation._id}/photos/upload', enctype='multipart/form-data', role='form')
+              .form-group
+                label(for='photos') Photo URL
+                  input.form-control#photos(type='file', name='photos', multiple=true)
+              button(type="submit" class="btn btn-info") Add Photo
+        
+        .row
+          .col-xs-4
+            each photo in vacation.photos
+              a.thumbnail(href='#')
+                img(src=photo)
 
 
 block scripts
